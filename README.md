@@ -43,15 +43,19 @@
 Ход работы:
 
 1. Демонстрация сохранения документа google.colab на свой диск
+
 ![На диске](https://user-images.githubusercontent.com/94571271/192746496-242db0ad-61bc-4154-a1c2-a1db67ccae7e.png)
 
 2. Запуск программы с выводом "Hello World!" в google.colab.
+
 ![HW GC](https://user-images.githubusercontent.com/94571271/192746731-430576f8-feda-427c-99af-8bc3e5146d90.png)
 
 3.Код в VS для вывода на консоль "Hello World!".
+
 ![Unity 1 1](https://user-images.githubusercontent.com/94571271/192747162-f02632d8-635e-4e4f-b7de-c387cd5449e0.png)
 
 4. Вывод сообщения "Hello World1" на консоль в Unity.
+
 ![Unity 1 2](https://user-images.githubusercontent.com/94571271/192747418-8d6d9412-eecd-4ebb-b956-74c59725d728.png)
 
 ## Задание 2
