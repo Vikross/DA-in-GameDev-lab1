@@ -91,32 +91,19 @@
 ![6](https://user-images.githubusercontent.com/94571271/192780633-f0697466-18f8-4803-8816-fb83524126c0.png)
 
 ## Задание 3
-### Какова роль параметра Lr? Ответьте на вопрос, приведите пример выполнения кода, который подтверждает ваш ответ. В качестве эксперимента можете изменить значение параметра.
+### 1. Должна ли величина loss стремиться к нулю при изменении исходных данных? Ответьте на вопрос, привидите пример выполнения кода, который подтверждает ваш ответ.
 
-- Перечисленные в этом туториале действия могут быть выполнены запуском на исполнение скрипт-файла, доступного [в репозитории](https://github.com/Den1sovDm1triy/hfss-scripting/blob/main/ScreatingSphereInAEDT.py).
-- Для запуска скрипт-файла откройте Ansys Electronics Desktop. Перейдите во вкладку [Automation] - [Run Script] - [Выберите файл с именем ScreatingSphereInAEDT.py из репозитория].
+Да, должна т.к. loss не сильно изменяется при изменении параметра times функции iterate.
 
-```py
+def iterate(a,b,x,y,times) :
+  for i in range(times) :
+  a,b=optimize(a,b,x,y)
+  return a,b
 
-import ScriptEnv
-ScriptEnv.Initialize("Ansoft.ElectronicsDesktop")
-oDesktop.RestoreWindow()
-oProject = oDesktop.NewProject()
-oProject.Rename("C:/Users/denisov.dv/Documents/Ansoft/SphereDIffraction.aedt", True)
-oProject.InsertDesign("HFSS", "HFSSDesign1", "HFSS Terminal Network", "")
-oDesign = oProject.SetActiveDesign("HFSSDesign1")
-oEditor = oDesign.SetActiveEditor("3D Modeler")
-oEditor.CreateSphere(
-	[
-		"NAME:SphereParameters",
-		"XCenter:="		, "0mm",
-		"YCenter:="		, "0mm",
-		"ZCenter:="		, "0mm",
-		"Radius:="		, "1.0770329614269mm"
-	], 
-)
-
-```
+def loss_function(a,b,x,y):
+  num = len(x)
+  prediction = model(a,b,x)
+  return (0.5 / num) * (np.square(prediction-y)).sum()
 
 ## Выводы
 
