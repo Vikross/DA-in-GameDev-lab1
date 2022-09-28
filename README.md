@@ -95,6 +95,8 @@
 
 Да, должна т.к. loss не сильно изменяется при изменении параметра times функции iterate.
 
+'''py
+
 def iterate(a,b,x,y,times) :
   for i in range(times) :
   a,b=optimize(a,b,x,y)
@@ -104,6 +106,8 @@ def loss_function(a,b,x,y):
   num = len(x)
   prediction = model(a,b,x)
   return (0.5 / num) * (np.square(prediction-y)).sum()
+'''  
+  
 
 ## Выводы
 
