@@ -42,7 +42,7 @@
 ### Написать программы Hello World на Python и Unity.
 Ход работы:
 
-1. Демонстрация сохранения документа google.colab на свой диск
+1. Демонстрация сохранения документа google.colab на свой диск.
 
 ![На диске](https://user-images.githubusercontent.com/94571271/192746496-242db0ad-61bc-4154-a1c2-a1db67ccae7e.png)
 
