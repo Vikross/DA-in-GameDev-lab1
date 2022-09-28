@@ -50,7 +50,7 @@
 
 ![HW GC](https://user-images.githubusercontent.com/94571271/192746731-430576f8-feda-427c-99af-8bc3e5146d90.png)
 
-3.Код в VS для вывода на консоль "Hello World!".
+3. Код в VS для вывода на консоль "Hello World!".
 
 ![Unity 1 1](https://user-images.githubusercontent.com/94571271/192747162-f02632d8-635e-4e4f-b7de-c387cd5449e0.png)
 
