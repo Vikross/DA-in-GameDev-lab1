@@ -1,5 +1,5 @@
 # АНАЛИЗ ДАННЫХ И ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ [in GameDev]
-Отчет по лабораторной работе #1 выполнил(а):
+Отчет по лабораторной работе #2 выполнил(а):
 - Емелькина Виктория Евгеньевна
 - РИ210947
 
@@ -39,24 +39,35 @@
 Ознакомиться с основными операторами зыка Python на примере реализации линейной регрессии.
 
 ## Задание 1
-### Написать программы Hello World на Python и Unity.
+### Реализовать совместную работу и передачу данных в связке Python - Google-Sheets – Unity.
 Ход работы:
 
-1. Демонстрация сохранения документа google.colab на свой диск.
+1. В облачном сервисе google console подключить API для работы с google sheets и google drive.
 
-![На диске](https://user-images.githubusercontent.com/94571271/192746496-242db0ad-61bc-4154-a1c2-a1db67ccae7e.png)
+![1](https://user-images.githubusercontent.com/94571271/195167316-500a800d-63bb-432c-9fa0-1c65c2bbe6f7.jpg)
 
-2. Запуск программы с выводом "Hello World!" в google.colab.
+![2](https://user-images.githubusercontent.com/94571271/195167353-3959de18-8d73-4699-8563-42454c999c44.jpg)
 
-![HW GC](https://user-images.githubusercontent.com/94571271/192746731-430576f8-feda-427c-99af-8bc3e5146d90.png)
 
-3. Код в VS для вывода на консоль "Hello World!".
+2. Реализовать запись данных из скрипта на python в google-таблицу. Данные описывают изменение темпа инфляции на протяжении 11 отсчётных периодов, с учётом стоимости игрового объекта в каждый период.
 
-![Unity 1 1](https://user-images.githubusercontent.com/94571271/192747162-f02632d8-635e-4e4f-b7de-c387cd5449e0.png)
+![3](https://user-images.githubusercontent.com/94571271/195167486-3a5b02a7-2cf9-4fe4-b435-86e934538d18.jpg)
 
-4. Вывод сообщения "Hello World1" на консоль в Unity.
+![4](https://user-images.githubusercontent.com/94571271/195167971-1a94a3a2-9b23-4c2c-bece-d6e524c35a4e.jpg)
 
-![Unity 1 2](https://user-images.githubusercontent.com/94571271/192747418-8d6d9412-eecd-4ebb-b956-74c59725d728.png)
+3. Создать новый проект на Unity, который будет получать данные из google- таблицы, в которую были записаны данные в предыдущем пункте.
+
+![5](https://user-images.githubusercontent.com/94571271/195168307-3f9ee17b-18d5-456e-b155-3ca52e7af2ac.png)
+
+
+4. Создать новый проект на Unity, который будет получать данные из google- таблицы, в которую были записаны данные в предыдущем пункте.
+
+![c1](https://user-images.githubusercontent.com/94571271/195170909-f7bd971e-4d62-497d-9aa1-e25b295afb35.jpg)
+
+![c2](https://user-images.githubusercontent.com/94571271/195170925-e413b7c1-9191-4a63-99a0-5ebc4c5c5e0a.jpg)
+
+![c3](https://user-images.githubusercontent.com/94571271/195170938-5abac091-8ea9-45d3-9dd1-12201af7698f.jpg)
+
 
 ## Задание 2
 ### В разделе "Ход работы" пошагово выполнить каждый пункт с описанием и примером реализации задачи по теме лабораторной работы.
