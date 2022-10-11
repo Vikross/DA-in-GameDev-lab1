@@ -76,7 +76,7 @@
 
 ![и1](https://user-images.githubusercontent.com/94571271/195174126-6ca9cad6-5f6f-4b1c-8feb-18d597d0c592.jpg)
 
-![и2](https://user-images.githubusercontent.com/94571271/195174140-0cd31ab3-6d19-40a9-ae8a-67b2b7e3edbf.jpg)
+![персер](https://user-images.githubusercontent.com/94571271/195177310-0078af35-cd94-4b8c-a1f1-9495831555c2.jpg)
 
 ![и3](https://user-images.githubusercontent.com/94571271/195174151-d1b784f5-fd6e-42bc-817c-69171a9139c7.jpg)
 
