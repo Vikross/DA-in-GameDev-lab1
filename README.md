@@ -39,18 +39,18 @@
 Ознакомиться с основными операторами зыка Python на примере реализации линейной регрессии.
 
 ## Задание 1
-### Написать программы Hello World на Python и Unity.
+### Реализовать систему машинного обучения в связке Python - Google-Sheets – Unity.
 Ход работы:
 
-1. Демонстрация сохранения документа google.colab на свой диск.
+1. Создала новый пустой 3D проект на Unity.
 
-![На диске](https://user-images.githubusercontent.com/94571271/192746496-242db0ad-61bc-4154-a1c2-a1db67ccae7e.png)
+![юнити 1](https://user-images.githubusercontent.com/94571271/198298804-d32f74d2-8f86-4c8d-8084-3379ecdfcc1f.jpg)
 
-2. Запуск программы с выводом "Hello World!" в google.colab.
+2. Добавила ML Agent в Unity.
 
-![HW GC](https://user-images.githubusercontent.com/94571271/192746731-430576f8-feda-427c-99af-8bc3e5146d90.png)
+![юнити 2](https://user-images.githubusercontent.com/94571271/198299485-de30b524-e7d9-448a-8fc2-0fb367734af7.jpg)
 
-3. Код в VS для вывода на консоль "Hello World!".
+3. Написала серию команд для создания и активации нового ML-агента, а также для скачивания необходимых библиотек.
 
 ![Unity 1 1](https://user-images.githubusercontent.com/94571271/192747162-f02632d8-635e-4e4f-b7de-c387cd5449e0.png)
 
