@@ -50,76 +50,196 @@
 
 ![юнити 2](https://user-images.githubusercontent.com/94571271/198299485-de30b524-e7d9-448a-8fc2-0fb367734af7.jpg)
 
-3. Написала серию команд для создания и активации нового ML-агента, а также для скачивания необходимых библиотек.
+3. Создала на сцене плоскость, куб и сферу.
 
-![Unity 1 1](https://user-images.githubusercontent.com/94571271/192747162-f02632d8-635e-4e4f-b7de-c387cd5449e0.png)
+![юнити 3](https://user-images.githubusercontent.com/94571271/198315396-35c71133-3dba-4854-9688-ab6fca2046f1.jpg)
 
-4. Вывод сообщения "Hello World1" на консоль в Unity.
-
-![Unity 1 2](https://user-images.githubusercontent.com/94571271/192747418-8d6d9412-eecd-4ebb-b956-74c59725d728.png)
-
-## Задание 2
-### В разделе "Ход работы" пошагово выполнить каждый пункт с описанием и примером реализации задачи по теме лабораторной работы.
-
-1. Произвела подготовку данных для работы с алгоритмом линейной регрессии. 10 видов данных были установлены случайным образом, и данные находились в линейной зависимости. Данные преобразуются в формат массива, чтобы их можно было вычислить напрямую при использовании умножения и сложения.
-
-![1](https://user-images.githubusercontent.com/94571271/192778703-2758de07-8d15-49d0-8cc4-10747b33f976.png)
-
-2. Определила связанные функции. Функция модели: определяет модель линейной регрессии wx+b. Функция потерь: функция потерь среднеквадратичной ошибки. Функция оптимизации: метод градиентного спуска для нахождения частных производных w и b.
-
-![2](https://user-images.githubusercontent.com/94571271/192779176-58976a89-8fe7-4caa-91ec-832b3597f95c.png)
-
-3. Начать итерацию.
-
-ШАГ 1. Инициализация и модель итеративной оптимизации.
-
-![1](https://user-images.githubusercontent.com/94571271/192780154-e24365bd-522c-4b6d-8689-92510990499b.png)
-
-ШАГ 2. На второй итерации отображаются значения параметров, значения потерь и эффекты визуализации после итерации.
-
-![2](https://user-images.githubusercontent.com/94571271/192780255-92d175a7-5926-4e71-84ae-d996e235c047.png)
-
-ШАГ 3. Третья итерация показывает значения параметров, значения потерь и визуализацию после итерации.
-
-![3](https://user-images.githubusercontent.com/94571271/192780344-35caa7b2-8d01-42e3-9471-7a096c4d44e5.png)
-
-ШАГ 4. На четвертой итерации отображаются значения параметров, значения потерь и эффекты визуализации.
-
-![4](https://user-images.githubusercontent.com/94571271/192780444-3f6e95fb-652e-41d4-b583-c0a8d8dfbaac.png)
-
-ШАГ 5. Пятая итерация показывает значение параметра, значение потерь и эффект визуализации после итерации.
-
-![5](https://user-images.githubusercontent.com/94571271/192780518-086d3a3e-fbcc-4bee-996e-d8c5e362fc74.png)
-
-ШАГ 6. 10000-я итерация, показывающая значения параметров, потери и визуализацию после итерации.
-
-![6](https://user-images.githubusercontent.com/94571271/192780633-f0697466-18f8-4803-8816-fb83524126c0.png)
-
-## Задание 3
-### 1. Должна ли величина loss стремиться к нулю при изменении исходных данных? Ответьте на вопрос, привидите пример выполнения кода, который подтверждает ваш ответ.
-
-Да, она должна стремиться к нулю т.к. loss не сильно изменяется при изменении параметра times функции iterate.
+4. Создала простой C# скрипт-файл и подключила его к сфере.
 
 ```py
 
-a, b = iterate(a, b, x, y, 2)
-prediction = model(a, b, x)
-loss = loss_function(a, b, x, y)
-print(a, b, loss)
-plt.scatter(x, y)
-plt.plot(x, prediction)
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Actuators;
 
-a, b = iterate(a, b, x, y, 10000)
-prediction = model(a, b, x)
-loss = loss_function(a, b, x, y)
-print(a, b, loss)
-plt.scatter(x, y)
-plt.plot(x, prediction)
+public class RollerAgent : Agent
+{
+    Rigidbody rBody;
+    // Start is called before the first frame update
+    void Start()
+    {
+        rBody = GetComponent<Rigidbody>();
+    }
+
+    public Transform Target;
+    public override void OnEpisodeBegin()
+    {
+        if (this.transform.localPosition.y < 0)
+        {
+            this.rBody.angularVelocity = Vector3.zero;
+            this.rBody.velocity = Vector3.zero;
+            this.transform.localPosition = new Vector3(0, 0.5f, 0);
+        }
+
+        Target.localPosition = new Vector3(Random.value * 8-4, 0.5f, Random.value * 8-4);
+    }
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        sensor.AddObservation(Target.localPosition);
+        sensor.AddObservation(this.transform.localPosition);
+        sensor.AddObservation(rBody.velocity.x);
+        sensor.AddObservation(rBody.velocity.z);
+    }
+    public float forceMultiplier = 10;
+    public override void OnActionReceived(ActionBuffers actionBuffers)
+    {
+        Vector3 controlSignal = Vector3.zero;
+        controlSignal.x = actionBuffers.ContinuousActions[0];
+        controlSignal.z = actionBuffers.ContinuousActions[1];
+        rBody.AddForce(controlSignal * forceMultiplier);
+
+        float distanceToTarget = Vector3.Distance(this.transform.localPosition, Target.localPosition);
+
+        if(distanceToTarget < 1.42f)
+        {
+            SetReward(1.0f);
+            EndEpisode();
+        }
+        else if (this.transform.localPosition.y < 0)
+        {
+            EndEpisode();
+        }
+    }
+}
 
 ```
-### 2. Какова роль параметра Lr? Ответьте на вопрос, приведите пример выполнения кода, который подтверждает ваш ответ. В качестве эксперимента можете изменить значение параметра.
+5. Добавила скрипт RollerAgent.cs к сфере и также компоненты Decision Requester, Behavior Parameters.
 
-Основываясь на моих экспериментах с изменением парамерта Lr и кода функции, я сделала вывод о том, что переменная Lr отвечает за линейную регрессию. ее направление. Пока я эксперементировала с переменной Lr, то заметила, что при увеличении параметра Lr угол между прямой и линией координат становиться больше.
+![юнити 4](https://user-images.githubusercontent.com/94571271/198319526-aa3b0b71-19b5-4ed6-9a5e-7038a51e9423.png)
+
+6. В корень проекта добавила файл конфигурации нейронной сети.
+
+![консоль 3](https://user-images.githubusercontent.com/94571271/198319920-7ed1040c-d6ad-45a5-94af-e2c59768d7e9.png)
+
+7. Запустила работу ml-агента.
+
+![консоль 4](https://user-images.githubusercontent.com/94571271/198321991-52c9a89f-d402-452f-8ead-a89c5400957a.jpg)
+
+8. Сделала 3, 9, 27 копий модели «Плоскость-Сфера-Куб», запустила симуляцию сцены и наблюдала за результатом обучения модели.
+
+![3 копии](https://user-images.githubusercontent.com/94571271/198323081-4a2d0109-8ee6-455c-bf18-12093706f669.jpg)
+
+![9 копий](https://user-images.githubusercontent.com/94571271/198323122-5f355354-3895-4cd8-9c63-6aab4cb3a97c.jpg)
+
+![27 копий](https://user-images.githubusercontent.com/94571271/198323142-dfd3c686-dec2-45f8-aad5-2bb8fb418da9.jpg)
+
+#### Вывод: Я сделала вывод о том, что чем больше копий, тем быстрее выполняется обучение. Также я заметила, что показатели Mean Reward и Std of Reward могут временно ухудшиться.
+
+## Задание 2
+### Подробно опишите каждую строку файла конфигурации нейронной сети. Самостоятельно найдите информацию о компонентах Decision Requester, Behavior Parameters, добавленных на сфере.
+
+```py
+
+behaviors:
+  RollerBall: # id агента
+    trainer_type: ppo # режим обучения (Proximal Policy Optimization)
+    
+    hyperparameters:
+      batch_size: 10 # Определяет количество иинформации, собираемой в ходе одного шага в градиентном спуске.
+      buffer_size: 100 # Определяет, сколько информации полученных в ходе выполнения действий будет сохранено в буфере перед тем, как на основе этих данных произойдет обучение или изменение модели.
+      learning_rate: 3.0e-4 # Параметр задает величину каждого шага обновления градиентного спуска.
+      beta: 5.0e-4 # Параметр задает степень регуляризации энтропии, и определяет, какой будет степень случайности в обновленной политике.
+      epsilon: 0.2 # Соответствует допустимому порогу расхождения между старой и новой политиками при обновлении с градиентным спуском.
+      lambd: 0.99 # Обозначает то, насколько агент полагается на текущую оценку значения при расчете обновленной ооценки значения.
+      num_epoch: 3 # Определяет количество проходов через буфер опыта во время градиентного спуска.
+      learning_rate_schedule: linear # Графики скорости обучения определяют, по какому графику будет проводиться корректировка скорости обучения путем снижения скорости обучения.
+                                     # linear линейно уменьшает скорость
+    network_settings: # Параметры нейронной сети
+      normalize: false # К входным данным векторного наблюдения не будет применяться нормализация. 
+      hidden_units: 128 # Соответствует количеству единиц в каждом полностью подключенном слое нейронной сети. 
+      num_layers: 2 # Определяет количество слоев нейронной сети. 
+    reward_signals: # Параметры вознаграждений
+      extrinsic:
+        gamma: 0.99 # Параметр задает степень значимости будущих вознаграждений.
+        strength: 1.0 # Коэффициент, на который умножается вознаграждение, предоставляемое средой.
+    max_steps: 500000 # Параметр задает количество шагов моделирования (умноженных на частоту кадров), выполняемых в процессе обучения.
+    time_horizon: 64 # Параметр соответствует количеству шагов опыта, которые необходимо собрать для каждого агента, прежде чем добавлять его в буфер опыта.
+    summary_freq: 10000 # Количество опыта, который необходимо собрать перед созданием и отображением статистики обучения
+
+```
+## Задание 3
+### Доработайте сцену и обучите ML-Agent таким образом, чтобы шар перемещался между двумя кубами разного цвета. Кубы должны, как и в первом задании, случайно изменять координаты на плоскости. 
+
+```py
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Actuators;
+
+public class RollerAgent : Agent
+{
+    Rigidbody rBody;
+    // Start is called before the first frame update
+    void Start()
+    {
+        rBody = GetComponent<Rigidbody>();
+    }
+
+    public Transform Target;
+    public Transform Target2;
+    public override void OnEpisodeBegin()
+    {
+        if (this.transform.localPosition.y < 0)
+        {
+            this.rBody.angularVelocity = Vector3.zero;
+            this.rBody.velocity = Vector3.zero;
+            this.transform.localPosition = new Vector3(0, 0.5f, 0);
+        }
+
+        Target.localPosition = new Vector3(Random.value * 8-4, 0.5f, Random.value * 8-4);
+        Target2.localPosition = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
+    }
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        sensor.AddObservation(Target.localPosition);
+        sensor.AddObservation(Target2.localPosition);
+        sensor.AddObservation(this.transform.localPosition);
+        sensor.AddObservation(rBody.velocity.x);
+        sensor.AddObservation(rBody.velocity.z);
+    }
+    public float forceMultiplier = 10;
+    public override void OnActionReceived(ActionBuffers actionBuffers)
+    {
+        Vector3 controlSignal = Vector3.zero;
+        controlSignal.x = actionBuffers.ContinuousActions[0];
+        controlSignal.z = actionBuffers.ContinuousActions[1];
+        rBody.AddForce(controlSignal * forceMultiplier);
+
+        float distanceToTarget = Vector3.Distance(this.transform.localPosition, Target.localPosition);
+        float distanceToTarget2 = Vector3.Distance(this.transform.localPosition, Target2.localPosition);
+
+        if(distanceToTarget < 1.42f || distanceToTarget2 < 1.42f)
+        {
+            SetReward(1.0f);
+            EndEpisode();
+        }
+        else if (this.transform.localPosition.y < 0)
+        {
+            EndEpisode();
+        }
+    }
+}
+
+```
+Проверка работы кода.
+
+![Конец](https://user-images.githubusercontent.com/94571271/198332266-1e3db634-683f-482d-9d3e-b47c267e917e.gif)
 
 ## Выводы
 
