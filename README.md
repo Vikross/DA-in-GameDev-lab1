@@ -39,24 +39,56 @@
 Ознакомиться с основными операторами зыка Python на примере реализации линейной регрессии.
 
 ## Задание 1
-### Написать программы Hello World на Python и Unity.
+### Измените параметры файла, yaml-агента и определите какие параметры и как влияю на обучение модели.
 Ход работы:
 
-1. Демонстрация сохранения документа google.colab на свой диск.
+1. Открыть скачанный проект Unity, ознакомиться с его работой.
 
-![На диске](https://user-images.githubusercontent.com/94571271/192746496-242db0ad-61bc-4154-a1c2-a1db67ccae7e.png)
+![image](https://user-images.githubusercontent.com/94571271/205281789-bc9f6595-9a03-40f9-9e0c-0344607ff778.png)
 
-2. Запуск программы с выводом "Hello World!" в google.colab.
+2. Переместить файл Economic.yaml в папку с проектом Unity.
 
-![HW GC](https://user-images.githubusercontent.com/94571271/192746731-430576f8-feda-427c-99af-8bc3e5146d90.png)
+3. Запустить Anaconda Prompt (от имени администратора). Создать виртуальное пространство.
 
-3. Код в VS для вывода на консоль "Hello World!".
+![image](https://user-images.githubusercontent.com/94571271/205282222-cafb4b3e-e8a5-4f02-9d3c-1971a417fe82.png)
 
-![Unity 1 1](https://user-images.githubusercontent.com/94571271/192747162-f02632d8-635e-4e4f-b7de-c387cd5449e0.png)
+4. Запустить сцену в Unity. Шарик начинает движение от одного кубика к другому. Для того чтобы ускорить процесс обучения – увеличьте количество префабов TargetAreaEconomiс.
 
-4. Вывод сообщения "Hello World1" на консоль в Unity.
+5. Устанавить библиотеку TensorBoard (pip install tensorflow) для того, чтобы построить графики оценки результатов обучения. 
+Первоначальные данные:
 
-![Unity 1 2](https://user-images.githubusercontent.com/94571271/192747418-8d6d9412-eecd-4ebb-b956-74c59725d728.png)
+![image](https://user-images.githubusercontent.com/94571271/205282851-22618f07-33cf-4659-8e53-d049e851636b.png)
+
+![image](https://user-images.githubusercontent.com/94571271/205282966-02174957-3ff5-4278-99b8-4587c4142350.png)
+
+![image](https://user-images.githubusercontent.com/94571271/205283048-ad915ca3-4a08-420b-8b29-044668456fd2.png)
+
+6. Изменить параметры yaml-агента.
+
+6.1 Изменить batch_size на 4096.
+
+![image](https://user-images.githubusercontent.com/94571271/205283918-84d69f95-436f-440e-ab98-94be7c027427.png)
+
+![image](https://user-images.githubusercontent.com/94571271/205283969-4bf095cf-6549-475c-a33f-49b174f51815.png)
+
+6.2 Изменить lambd на 0.1.
+
+![image](https://user-images.githubusercontent.com/94571271/205284098-8c01f91e-68cc-4231-bbcd-2c13775bb88c.png)
+
+![image](https://user-images.githubusercontent.com/94571271/205284130-e5e9d048-33d1-43a6-82f5-7d677b900b60.png)
+
+6.3 Изменить buffer_size на 150.
+
+![image](https://user-images.githubusercontent.com/94571271/205284241-764a83b4-6f1b-47d2-8878-f10a63ec24a5.png)
+
+![image](https://user-images.githubusercontent.com/94571271/205284269-b1bc9239-d7c2-4b2f-9663-5efc569363c8.png)
+
+6.4 Изменить num_layers на 100.
+
+![image](https://user-images.githubusercontent.com/94571271/205284421-7567a03b-a583-4022-af7d-9f7a0eab1abd.png)
+
+![image](https://user-images.githubusercontent.com/94571271/205284463-fc1e918a-d109-4a04-b25b-037934df0476.png)
+
 
 ## Задание 2
 ### В разделе "Ход работы" пошагово выполнить каждый пункт с описанием и примером реализации задачи по теме лабораторной работы.
