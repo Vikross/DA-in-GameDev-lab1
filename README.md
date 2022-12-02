@@ -46,20 +46,136 @@
 
 ![image](https://user-images.githubusercontent.com/94571271/205273601-387136ab-8d5e-48ed-ba87-7b33707eaa7a.png)
 
-2. Запуск программы с выводом "Hello World!" в google.colab.
+2. В ходе выполнения работы был добавлен скрипт Perceptron.cs
 
-![HW GC](https://user-images.githubusercontent.com/94571271/192746731-430576f8-feda-427c-99af-8bc3e5146d90.png)
+```py
 
-3. Код в VS для вывода на консоль "Hello World!".
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-![Unity 1 1](https://user-images.githubusercontent.com/94571271/192747162-f02632d8-635e-4e4f-b7de-c387cd5449e0.png)
+[System.Serializable]
+public class TrainingSet
+{
+	public double[] input;
+	public double output;
+}
 
-4. Вывод сообщения "Hello World1" на консоль в Unity.
+public class Perceptron : MonoBehaviour {
 
-![Unity 1 2](https://user-images.githubusercontent.com/94571271/192747418-8d6d9412-eecd-4ebb-b956-74c59725d728.png)
+	public TrainingSet[] ts;
+	double[] weights = {0,0};
+	double bias = 0;
+	double totalError = 0;
+
+	double DotProductBias(double[] v1, double[] v2) 
+	{
+		if (v1 == null || v2 == null)
+			return -1;
+	 
+		if (v1.Length != v2.Length)
+			return -1;
+	 
+		double d = 0;
+		for (int x = 0; x < v1.Length; x++)
+		{
+			d += v1[x] * v2[x];
+		}
+
+		d += bias;
+	 
+		return d;
+	}
+
+	double CalcOutput(int i)
+	{
+		double dp = DotProductBias(weights,ts[i].input);
+		if(dp > 0) return(1);
+		return (0);
+	}
+
+	void InitialiseWeights()
+	{
+		for(int i = 0; i < weights.Length; i++)
+		{
+			weights[i] = Random.Range(-1.0f,1.0f);
+		}
+		bias = Random.Range(-1.0f,1.0f);
+	}
+
+	void UpdateWeights(int j)
+	{
+		double error = ts[j].output - CalcOutput(j);
+		totalError += Mathf.Abs((float)error);
+		for(int i = 0; i < weights.Length; i++)
+		{			
+			weights[i] = weights[i] + error*ts[j].input[i]; 
+		}
+		bias += error;
+	}
+
+	double CalcOutput(double i1, double i2)
+	{
+		double[] inp = new double[] {i1, i2};
+		double dp = DotProductBias(weights,inp);
+		if(dp > 0) return(1);
+		return (0);
+	}
+
+	void Train(int epochs)
+	{
+		InitialiseWeights();
+		
+		for(int e = 0; e < epochs; e++)
+		{
+			totalError = 0;
+			for(int t = 0; t < ts.Length; t++)
+			{
+				UpdateWeights(t);
+				Debug.Log("W1: " + (weights[0]) + " W2: " + (weights[1]) + " B: " + bias);
+			}
+			Debug.Log("TOTAL ERROR: " + totalError);
+		}
+	}
+
+	void Start () {
+		Train(4);
+		Debug.Log("Test 0 0: " + CalcOutput(0,0));
+		Debug.Log("Test 0 1: " + CalcOutput(0,1));
+		Debug.Log("Test 1 0: " + CalcOutput(1,0));
+		Debug.Log("Test 1 1: " + CalcOutput(1,1));	
+	}
+	
+	void Update () {
+		
+	}
+}
+
+```
+3. В проекте юнити реализовать перцептрон, который умеет выполнять логические операции OR, AND, XOR, NAND.
+
+3.1 Обучение перцептрона на логическую операцию OR.
+
+![image](https://user-images.githubusercontent.com/94571271/205275019-66ca10c9-796a-4b68-98d2-3e25b744b76d.png)
+
+3.2 Обучение перцептрона на логическую операцию AND.
+
+![image](https://user-images.githubusercontent.com/94571271/205275149-29f9129a-5079-4faa-86f7-8ddee497ca9a.png)
+
+3.3 Обучение перцептрона на логическую операцию NAND.
+
+![image](https://user-images.githubusercontent.com/94571271/205275270-b7dfe89d-e60c-4f8e-aa22-6a79828307a9.png)
+
+В случает обучения перцептрона на логическую операцию NAND понадобилось 7 эпох, а не 4 как ранее.
+
+3.4 Обучение перцептрона на логическую операцию XOR.
+
+![image](https://user-images.githubusercontent.com/94571271/205275578-0f2b0fea-2e67-42eb-818b-71a6f6aae29e.png)
+
+В случает обучения перцептрона на логическую операцию XOR - оно было неуспешно. Даже спустя 1000 эпох не смог обучиться и некорректно выполняет вычисления т.к. данная операция из-за линейной модели перцептрона не может разделить плоскость одной линией.
 
 ## Задание 2
-### В разделе "Ход работы" пошагово выполнить каждый пункт с описанием и примером реализации задачи по теме лабораторной работы.
+### Построить графики зависимости количества эпох от ошибки обучения. Указать от чего зависит необходимое количество эпох обучения.
 
 1. Произвела подготовку данных для работы с алгоритмом линейной регрессии. 10 видов данных были установлены случайным образом, и данные находились в линейной зависимости. Данные преобразуются в формат массива, чтобы их можно было вычислить напрямую при использовании умножения и сложения.
 
