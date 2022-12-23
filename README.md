@@ -185,8 +185,9 @@ public class NewBehaviourScript : MonoBehaviour
 }
 ```
 
+Вывод в консоли:
+![image](https://user-images.githubusercontent.com/94571271/209266899-1912129c-b2fc-46e9-9ec3-6cb1112c078e.png)
 
-Вывод консоли: ![image](https://user-images.githubusercontent.com/94571271/209266826-4cf341ea-6826-446a-b52d-657550078441.png)
 
 ## Выводы
 
